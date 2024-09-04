@@ -1,0 +1,8 @@
+C:\Users\iliam\source\repos\RecipeData\TestingRecipe\bin\Debug\TestingRecipe.exe.config
+C:\Users\iliam\source\repos\RecipeData\TestingRecipe\bin\Debug\TestingRecipe.exe
+C:\Users\iliam\source\repos\RecipeData\TestingRecipe\bin\Debug\TestingRecipe.pdb
+C:\Users\iliam\source\repos\RecipeData\TestingRecipe\obj\Debug\TestingRecipe.csproj.AssemblyReference.cache
+C:\Users\iliam\source\repos\RecipeData\TestingRecipe\obj\Debug\TestingRecipe.csproj.SuggestedBindingRedirects.cache
+C:\Users\iliam\source\repos\RecipeData\TestingRecipe\obj\Debug\TestingRecipe.csproj.CoreCompileInputs.cache
+C:\Users\iliam\source\repos\RecipeData\TestingRecipe\obj\Debug\TestingRecipe.exe
+C:\Users\iliam\source\repos\RecipeData\TestingRecipe\obj\Debug\TestingRecipe.pdb

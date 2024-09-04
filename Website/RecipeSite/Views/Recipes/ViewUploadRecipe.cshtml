@@ -1,0 +1,130 @@
+﻿@{
+
+    Layout = "~/Views/MasterPage.cshtml";
+
+}
+@section MainContent {
+    <form></form>
+    <form method="post" action="http://localhost:54322/Recipes/UploadRecipe" class="upload-form" id="uploadForm">
+        <h1>Upload Recipe</h1>
+        <input type="text" class="input" placeholder="Recipe Name" name="RecipeName" required />
+        <input type="number" class="input" placeholder="Time (minutes)" name="Time" required />
+        <textarea class="input" placeholder="Ingredients (separated by commas)" name="Ingredients" rows="4" required></textarea>
+        <input type="number" class="input" placeholder="Calories" name="Calories" required />
+        <textarea class="input" placeholder="Description" name="Description" rows="4" required></textarea>
+        <textarea class="input" placeholder="Instructions" name="Instructions" rows="4" required></textarea>
+        <input type="text" class="input" placeholder="Image URL" name="RecipeImage" required />
+        <input type="submit" class="upload-button" id="UploadButton" value="Upload Recipe" />
+        <div id="errorMessage" style="color: red; display: none;">Please fill out all fields correctly.</div>
+    </form>
+    <p class="contact-info">If you want to delete or edit your recipes, please contact us at <a href="tel:+0549203775">054-920-3775</a>.</p>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var submitButton = document.getElementById("UploadButton");
+
+            submitButton.addEventListener("click", function (event) {
+                var form = document.getElementById("uploadForm");
+                var inputs = form.querySelectorAll(".input");
+                var valid = true;
+
+                inputs.forEach(function (input) {
+                    if (!input.value.trim()) {
+                        valid = false;
+                        input.classList.add("invalid");
+                    } else {
+                        input.classList.remove("invalid");
+                    }
+
+                    if (input.type === "number" && isNaN(input.value)) {
+                        valid = false;
+                        input.classList.add("invalid");
+                    } else if (input.type === "number" && !isNaN(input.value)) {
+                        input.classList.remove("invalid");
+                    }
+                });
+
+                if (!valid) {
+                    event.preventDefault();
+                    document.getElementById("errorMessage").style.display = "block";
+                } else {
+                    document.getElementById("errorMessage").style.display = "none";
+                }
+            });
+        });
+    </script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .upload-form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .upload-form h1 {
+                text-align: center;
+                color: #4CAF50;
+                margin-bottom: 20px;
+            }
+
+        .input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+            .input.invalid {
+                border-color: red;
+            }
+
+        .upload-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .upload-button:hover {
+                background-color: #45a049;
+            }
+
+        #errorMessage {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+            .contact-info a {
+                color: #4CAF50;
+                text-decoration: none;
+            }
+
+                .contact-info a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+}

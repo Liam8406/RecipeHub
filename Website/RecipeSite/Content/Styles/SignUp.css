@@ -1,0 +1,130 @@
+﻿/* SignUp.css */
+
+body {
+    margin: 0;
+}
+
+.image {
+    display: block;
+    width: 50vw;
+    height: 100vh;
+}
+
+.SignUpBox {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 1px solid black;
+    width: 18vw;
+    height: 50vh;
+    margin-right: 16vw;
+    margin-top: 25vh;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Cascadia Mono';
+    font-size: 20px;
+}
+
+.Input {
+    margin-top: 20px;
+    font-size: 17px;
+    border-radius: 5px;
+    border-width: 1px;
+    padding-top: 3px;
+}
+
+.SignUpButton {
+    margin-top: 20px;
+    position: center;
+    background-color: royalblue;
+    color: white;
+    font-size: 17px;
+    border-width: 0;
+    padding-right: 80px;
+    padding-left: 80px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+    .SignUpButton:hover {
+        background-color: mediumblue;
+        cursor: pointer;
+    }
+
+.DirectToLogin {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.errors {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: white;
+    font-size: 13px;
+    margin-right: 22px;
+}
+
+.nameError {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: red;
+    margin-top: 280px;
+    width: 200px;
+}
+
+.emailError {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 346px;
+    background-color: red;
+    width: 200px;
+}
+
+.passwordError {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 385px;
+    background-color: red;
+    width: 200px;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ff4d4d;
+    background-color: #ffe6e6;
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 18vw;
+    margin-right: 16vw;
+    margin-top: 15vh;
+    font-weight: bold;
+    font-family: 'Cascadia Mono';
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 32px;
+    text-decoration: none;
+    color: #333;
+}
+
+    .back-arrow:hover {
+        color: #007bff;
+        cursor: pointer;
+    }
+
+    .back-arrow::before {
+        content: "\2190"; /* Unicode for left arrow */
+    }

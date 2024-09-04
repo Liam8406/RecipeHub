@@ -1,0 +1,212 @@
+﻿body, html {
+    margin: 0;
+    width: 100%;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.left-column {
+    flex: 1 1 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+
+.recipe-image {
+    width: 100%;
+    height: auto;
+}
+
+.tags, .calories, .time {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.tag {
+    background-color: yellow;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.right-column {
+    flex: 1 1 55%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.ingredients, .how-to-make {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+    .ingredients h2, .how-to-make h2 {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+
+    button.delete-button {
+        color: #a94442;
+        border: 1px solid #a94442;
+        background-color: #f2dede;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-top: 10px;
+    }
+
+        button.delete-button:hover {
+            background-color: #e6b8b8;
+        }
+
+.review {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+    font-size: 14px;
+}
+
+    .review p {
+        margin: 5px 0;
+    }
+
+    .review strong {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .review .rating {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ffd700;
+        color: #fff;
+        padding: 5px;
+        border-radius: 50%;
+        font-size: 14px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .review .rating:before {
+            content: "★";
+            margin-right: 3px;
+        }
+
+    .review .date-posted {
+        font-size: 12px;
+        color: #777;
+    }
+
+.write-review {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.success-message, .error-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+}
+
+.success-message {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+}
+
+.error-message {
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+}
+
+.message-container {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.recipe-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+    .recipe-details .time {
+        font-size: 12px;
+        color: #777;
+    }
+
+.save-recipe-button, .favorite-recipe-button {
+    background-color: white;
+    border: 2px solid #4CAF50;
+    border-radius: 20px;
+    color: #4CAF50;
+    cursor: pointer;
+    outline: none;
+    font-weight: 600;
+    padding: 7px 13px;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+    .save-recipe-button:hover, .favorite-recipe-button:hover {
+        color: white;
+        background-color: #4CAF50;
+        cursor: pointer;
+    }
+
+.favorite-recipe-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+    margin-top: 10px;
+}
+
+.recipe-details > div {
+    margin-top: 10px;
+}

@@ -1,0 +1,48 @@
+﻿@using RecipeData.DataAccessLayer.Models
+@model RecipeData.DataAccessLayer.ViewModels.RecipeListViewModel
+@{
+    ViewBag.Title = "ViewHomePage";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+@section MainContent {
+    <link href="~/Content/Styles/StyleMainPage.css" rel="stylesheet" />
+    <div class="content">
+        <h2>Recipes</h2>
+
+        @if (Model.Recipes.Count > 0)
+        {
+            for (int i = 0; i < Model.Recipes.Count; i += 4)
+            {
+                <div class="grid-container">
+                    @for (int j = i; j < i + 4 && j < Model.Recipes.Count; j++)
+                    {
+                        var recipe = Model.Recipes[j];
+                        <a class="item" href="http://localhost:54322/Recipes/ViewRecipe/?RecipeId=@recipe.Id">
+                            <img src="@recipe.RecipeImage" class="recipe-image" />
+                            <div class="header-time">
+                                <h3>@recipe.RecipeName</h3>
+                                <p class="time">Time: @recipe.Time min</p>
+                                <p class="calories">Calories: @recipe.Calories</p>
+                            </div>
+                            <p class="recipe-desc">@recipe.Description</p>
+                        </a>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <p>No recipes found.</p>
+        }
+
+        @if (ViewBag.TotalPages > 1)
+        {
+            <div class="pagination">
+                @for (int page = 1; page <= ViewBag.TotalPages; page++)
+                {
+                    <a href="@Url.Action("ViewGetRecipe", new { RecipeName = Request.QueryString["RecipeName"], time = Request.QueryString["time"], page = page })" class="@(page == ViewBag.CurrentPage ? "active" : "")">@page</a>
+                }
+            </div>
+        }
+    </div>
+}

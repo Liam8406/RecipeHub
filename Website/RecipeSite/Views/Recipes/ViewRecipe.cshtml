@@ -1,0 +1,153 @@
+﻿@using RecipeData.DataAccessLayer.Models
+@model RecipesModel
+@{
+    RecipesModel recipe = (RecipesModel)Session["recipe"];
+    UserModel user = (UserModel)Session["user"];
+    List<ReviewModel> reviews = ViewBag.Reviews ?? new List<ReviewModel>();
+    bool isFavourite = ViewBag.IsFavourite != null && (bool)ViewBag.IsFavourite;
+    ViewBag.Title = "ViewRecipe";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+@section MainContent {
+    <link href="~/Content/Styles/RecipeStyle.css" rel="stylesheet" />
+    <div class="container">
+        <form></form>
+        <div class="left-column">
+            <img class="recipe-image" src="@recipe.RecipeImage" alt="Recipe Image">
+            <div class="recipe-details">
+                <div class="calories">
+                    <p>Calories: @recipe.Calories</p>
+                </div>
+                <div class="time">
+                    <p>Time: @recipe.Time min</p>
+                </div>
+                @if (user != null)
+                {
+                    if (!isFavourite)
+                    {
+
+                        <form method="post" action="http://localhost:54322/Recipes/FavouriteRecipe">
+                            <input type="hidden" name="RecipeID" value="@recipe.Id" />
+                            <input type="hidden" name="UserID" value="@user.Id" />
+                            <button type="submit" class="favorite-recipe-button">Favorite Recipe</button>
+                        </form>
+                        <input type="hidden" id="isFavouriteState" value="false" />
+                    }
+                    else
+                    {
+                        <p class="favorite-recipe-text">Recipe saved!</p>
+                        <input type="hidden" id="isFavouriteState" value="true" />
+                    }
+                }
+            </div>
+            <div class="reviews">
+                <h3>Reviews</h3>
+
+                @if (TempData["Message"] != null)
+                {
+                    <div class="success-message">@TempData["Message"]</div>
+                }
+                @if (TempData["Error"] != null)
+                {
+                    <div class="error-message">@TempData["Error"]</div>
+                }
+
+                @if (reviews.Count > 0)
+                {
+                    foreach (var review in reviews)
+                    {
+                        var userName = Session[$"UserName_{review.UserID}"] as string;
+                        if (userName == null)
+                        {
+                            userName = "Unknown User";
+                        }
+                        <div class="review">
+                            <p class="rating">@review.Rating</p>
+                            <p><strong>@userName</strong> <span class="date-posted">@review.DatePosted.ToString("d")</span></p>
+                            <p>@review.ReviewDescription</p>
+                            @if (user != null && user.Id == review.UserID)
+                            {
+                                <form method="post" action="http://localhost:54322/Reviews/DeleteReview" class="delete-review-form">
+                                    <input type="hidden" name="UserID" value="@user.Id" />
+                                    <input type="hidden" name="RecipeID" value="@recipe.Id" />
+                                    <button type="submit" class="delete-button">Delete</button>
+                                </form>
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No reviews yet.</p>
+                }
+
+                <div class="write-review">
+                    <label for="reviewDescription">Write a review (registered users only)</label>
+                    <form method="post" action="http://localhost:54322/Reviews/PostReview">
+                        <textarea name="ReviewDescription" id="reviewDescription" rows="4" required></textarea>
+                        <label for="rating">Rating:</label>
+                        <select name="Rating" id="rating" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <input type="hidden" name="RecipeID" value="@recipe.Id" />
+                        <button type="button" id="submitReviewButton">Post</button>
+                    </form>
+
+                    <div class="message-container">
+                        @if (TempData["Message"] != null)
+                        {
+                            <div class="success-message">@TempData["Message"]</div>
+                        }
+                        @if (TempData["Error"] != null)
+                        {
+                            <div class="error-message">@TempData["Error"]</div>
+                        }
+                    </div>
+
+                    @if (user == null)
+                    {
+                        <p><a href="http://localhost:54322/User/ViewLogIn">Log in to post a review</a></p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="right-column">
+            <div class="ingredients">
+                <h2>Ingredients</h2>
+                @{
+                    var ingredients = recipe.Ingredients.Split(',');
+                    foreach (var ingredient in ingredients)
+                    {
+                        <p>@ingredient.Trim()</p>
+                    }
+                }
+            </div>
+            <div class="how-to-make">
+                <h2>How to make</h2>
+                <p>@recipe.Instructions</p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var submitButton = document.getElementById("submitReviewButton");
+
+            submitButton.addEventListener("click", function () {
+                var isFavouriteState = document.getElementById("isFavouriteState").getAttribute('data-value');
+                if (isFavouriteState) {
+                    document.forms[1].submit();
+                }
+                else
+                {
+                    document.forms[2].submit();
+                }
+                    
+                // Submit the third form
+            });
+        });
+    </script>
+}

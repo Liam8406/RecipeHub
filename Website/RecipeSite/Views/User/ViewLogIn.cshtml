@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewLogIn</title>
+    <link href="~/Content/Styles/SignUp.css" rel="stylesheet" />
+</head>
+<body>
+    <a href="http://localhost:54322/Recipes/ViewHomePage" class="back-arrow">&#x2190;</a>
+    <form method="post" action="http://localhost:54322/User/Login">
+        @if (ViewBag.Error != null)
+        {
+            <h2 class="error-message">Invalid username or password. Please try again.</h2>
+        }
+        <h2 hidden class="error-message">Invalid username or password. Please try again.</h2>
+        <img class="image" src="~/Content/images/LoginImage.png" />
+        <div class="SignUpBox">
+            <h1> LogIn</h1>
+            <input type="text" class="Input" placeholder="Username" name="UserName" id="username" />
+            <input type="password" class="Input" placeholder="Password" name="UserPassword" id="password" />
+            <input type="button" class="SignUpButton" value="Log In" id="LogIn" />
+            <br />
+            <label class="DirectToLogin">Don't have an account?</label>
+            <a class="DirectToLogin" href="http://localhost:54322/User/ViewSignUp">Sign Up</a>
+        </div>
+        <script src="~/Content/JavaScript/SubmitLogIn.js"></script>
+    </form>
+</body>
+</html>

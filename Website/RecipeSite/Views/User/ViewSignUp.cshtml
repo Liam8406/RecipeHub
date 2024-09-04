@@ -1,0 +1,58 @@
+﻿@using RecipeData.DataAccessLayer.Models
+@model UserModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewSignup</title>
+    <link href="~/Content/Styles/SignUp.css" rel="stylesheet" />
+</head>
+<body>
+    <a href="http://localhost:54322/Recipes/ViewHomePage" class="back-arrow"></a>
+    @if (ViewBag.Error != null)
+    {
+        <h2>Error</h2>
+        <div class="errors">
+            <div class="nameError" id="errorUserName" style="display: none;"></div>
+            <div class="emailError" id="errorEmail" style="display: none;"></div>
+            <div class="passwordError" id="errorPassword" style="display: none;"></div>
+        </div>
+        <form method="post" action="http://localhost:53513/User/SignUp">
+            <img class="image" src="~/Content/images/LoginImage.png" />
+            <div class="SignUpBox">
+                <h1> Sign Up</h1>
+                <input type="text" id="username" class="Input" placeholder="Username" name="UserName" value="@Model.UserName" />
+                <input type="email" id="email" class="Input" placeholder="Email" name="UserEmail" value="@Model.UserEmail" />
+                <input type="password" id="password" class="Input" placeholder="Password" name="UserPassword" value="@Model.UserPassword" />
+                <input type="button" id="signUpButton" class="SignUpButton" value="Sign Up" />
+                <br />
+                <label class="DirectToLogin">Already have an account?</label>
+                <a href="http://localhost:54322/User/ViewLogIn" class="DirectToLogin">Log in</a>
+            </div>
+        </form>
+    }
+    <div class="errors">
+        <div class="nameError" id="errorUserName" style="display: none;"></div>
+        <div class="emailError" id="errorEmail" style="display: none;"></div>
+        <div class="passwordError" id="errorPassword" style="display: none;"></div>
+    </div>
+    <form method="post" action="http://localhost:54322/User/SignUp">
+        <img class="image" src="~/Content/images/LoginImage.png" />
+        <div class="SignUpBox">
+            <h1> Sign Up</h1>
+            <input type="text" id="username" class="Input" placeholder="Username" name="UserName" />
+            <input type="email" id="email" class="Input" placeholder="Email" name="UserEmail" />
+            <input type="password" id="password" class="Input" placeholder="Password" name="UserPassword" />
+            <input type="button" id="signUpButton" class="SignUpButton" value="Sign Up" />
+            <br />
+            <label class="DirectToLogin">Already have an account?</label>
+            <a href="http://localhost:54322/User/ViewLogIn" class="DirectToLogin">Log in</a>
+        </div>
+    </form>
+    <script src="~/Content/JavaScript/SignUpCheck.js"></script>
+</body>
+</html>

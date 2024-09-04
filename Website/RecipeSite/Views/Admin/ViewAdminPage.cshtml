@@ -1,0 +1,276 @@
+﻿@using RecipeData.DataAccessLayer.Models
+@model RecipeData.DataAccessLayer.ViewModels.RecipeListViewModel
+@{
+    ViewBag.Title = "Admin Page";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+@section MainContent {
+
+    <h2>Admin Page</h2>
+    @if (Session["Admin"] != null)
+    {
+        <div class="content">
+            @if (TempData["Message"] != null)
+            {
+                <div class="success-message">@TempData["Message"]</div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="error-message">@TempData["Error"]</div>
+            }
+
+            <form></form> <!-- Blank form to ensure the next form is indexed at 1 -->
+
+            <div class="admin-section">
+                <h2>Manage Recipes</h2>
+                <form method="post" action="http://localhost:54322/Admin/DeleteRecipe">
+                    <label for="deleteRecipeId">Delete Recipe:</label>
+                    <select id="deleteRecipeId" required>
+                        @foreach (var recipe in Model.Recipes)
+                        {
+                            <option value="@recipe.Id" data-name="@recipe.RecipeName" data-image="@recipe.RecipeImage" data-calories="@recipe.Calories" data-time="@recipe.Time" data-ingredients="@recipe.Ingredients" data-description="@recipe.Description" data-instructions="@recipe.Instructions">@recipe.RecipeName (ID: @recipe.Id)</option>
+                        }
+                    </select>
+                    <input type="hidden" id="hiddenRecipeId" name="Id" />
+                    <input type="hidden" id="hiddenRecipeName" name="RecipeName" />
+                    <input type="hidden" id="hiddenRecipeImage" name="RecipeImage" />
+                    <input type="hidden" id="hiddenRecipeCalories" name="Calories" />
+                    <input type="hidden" id="hiddenRecipeTime" name="Time" />
+                    <input type="hidden" id="hiddenRecipeIngredients" name="Ingredients" />
+                    <input type="hidden" id="hiddenRecipeDescription" name="Description" />
+                    <input type="hidden" id="hiddenRecipeInstructions" name="Instructions" />
+                    <button type="button" id="deleteRecipeButton">Delete</button>
+                </form>
+                <button type="button" id="showUpdateFormButton">Show Update Form</button>
+                <form method="post" action="http://localhost:54322/Admin/UpdateRecipe" id="updateForm" style="display: none;">
+                    <label for="updateRecipeId">Update Recipe:</label>
+                    <select id="updateRecipeId" required>
+                        @foreach (var recipe in Model.Recipes)
+                        {
+                            <option value="@recipe.Id" data-name="@recipe.RecipeName" data-image="@recipe.RecipeImage" data-calories="@recipe.Calories" data-time="@recipe.Time" data-ingredients="@recipe.Ingredients" data-description="@recipe.Description" data-instructions="@recipe.Instructions">@recipe.RecipeName (ID: @recipe.Id)</option>
+                        }
+                    </select>
+                    <input type="hidden" id="hiddenUpdateRecipeId" name="Id" />
+                    <label for="updateRecipeName">Name:</label>
+                    <input type="text" id="updateRecipeName" name="RecipeName" />
+                    <label for="updateRecipeImage">Image:</label>
+                    <input type="text" id="updateRecipeImage" name="RecipeImage" />
+                    <label for="updateRecipeCalories">Calories:</label>
+                    <input type="text" id="updateRecipeCalories" name="Calories" />
+                    <label for="updateRecipeTime">Time:</label>
+                    <input type="text" id="updateRecipeTime" name="Time" />
+                    <label for="updateRecipeIngredients">Ingredients:</label>
+                    <input type="text" id="updateRecipeIngredients" name="Ingredients" />
+                    <label for="updateRecipeDescription">Description:</label>
+                    <input type="text" id="updateRecipeDescription" name="Description" />
+                    <label for="updateRecipeInstructions">Instructions:</label>
+                    <input type="text" id="updateRecipeInstructions" name="Instructions" />
+                    <button type="submit" id="updateRecipeButton">Update</button>
+                </form>
+            </div>
+
+            <div class="admin-section">
+                <h2>Manage Reviews</h2>
+                <form method="post" action="http://localhost:54322/Admin/DeleteReview">
+                    <label for="deleteReviewId">Delete Review:</label>
+                    <select id="deleteReviewId" required>
+                        @foreach (var review in Model.Reviews)
+                        {
+                            <option value="@review.Id" data-recipeid="@review.RecipeID" data-userid="@review.UserID" data-dateposted="@review.DatePosted" data-description="@review.ReviewDescription" data-rating="@review.Rating">@review.ReviewDescription (ID: @review.Id)</option>
+                        }
+                    </select>
+                    <input type="hidden" id="hiddenReviewId" name="Id" />
+                    <input type="hidden" id="hiddenReviewRecipeID" name="RecipeID" />
+                    <input type="hidden" id="hiddenReviewUserID" name="UserID" />
+                    <input type="hidden" id="hiddenReviewDatePosted" name="DatePosted" />
+                    <input type="hidden" id="hiddenReviewDescription" name="ReviewDescription" />
+                    <input type="hidden" id="hiddenReviewRating" name="Rating" />
+                    <button type="button" id="deleteReviewButton">Delete</button>
+                </form>
+                <button type="button" id="showUpdateReviewFormButton">Show Update Form</button>
+                <form method="post" action="http://localhost:54322/Admin/UpdateReview" id="updateReviewForm" style="display: none;">
+                    <label for="updateReviewId">Update Review:</label>
+                    <select id="updateReviewId" required>
+                        @foreach (var review in Model.Reviews)
+                        {
+                            <option value="@review.Id" data-recipeid="@review.RecipeID" data-userid="@review.UserID" data-dateposted="@review.DatePosted" data-description="@review.ReviewDescription" data-rating="@review.Rating">@review.ReviewDescription (ID: @review.Id)</option>
+                        }
+                    </select>
+                    <input type="hidden" id="hiddenUpdateReviewId" name="Id" />
+                    <input type="hidden" id="hiddenUpdateReviewRecipeID" name="RecipeID" />
+                    <input type="hidden" id="hiddenUpdateReviewUserID" name="UserID" />
+                    <input type="hidden" id="hiddenUpdateReviewDatePosted" name="DatePosted" />
+                    <label for="updateReviewDescription">Description:</label>
+                    <input type="text" id="updateReviewDescription" name="ReviewDescription" />
+                    <label for="updateReviewRating">Rating:</label>
+                    <input type="text" id="updateReviewRating" name="Rating" />
+                    <button type="submit" id="updateReviewButton">Update</button>
+                </form>
+            </div>
+
+            <div class="admin-section">
+                <h2>Manage Users</h2>
+                <form method="post" action="http://localhost:54322/Admin/DeleteUser">
+                    <label for="deleteUserId">Delete User:</label>
+                    <select id="deleteUserId" required>
+                        @foreach (var user in Model.Users)
+                        {
+                            <option value="@user.Id" data-username="@user.UserName" data-email="@user.UserEmail">@user.UserName (ID: @user.Id)</option>
+                        }
+                    </select>
+                    <input type="hidden" id="hiddenUserId" name="Id" />
+                    <input type="hidden" id="hiddenUserName" name="UserName" />
+                    <input type="hidden" id="hiddenUserEmail" name="Email" />
+                    <button type="button" id="deleteUserButton">Delete</button>
+                </form>
+                <button type="button" id="showUpdateUserFormButton">Show Update Form</button>
+                <form method="post" action="http://localhost:54322/Admin/UpdateUser" id="updateUserForm" style="display: none;">
+                    <label for="updateUserId">Update User:</label>
+                    <select id="updateUserId" required>
+                        @foreach (var user in Model.Users)
+                        {
+                            <option value="@user.Id" data-username="@user.UserName" data-email="@user.UserEmail">@user.UserName (ID: @user.Id)</option>
+                        }
+                    </select>
+                    <input type="hidden" id="hiddenUpdateUserId" name="Id" />
+                    <label for="updateUserName">Username:</label>
+                    <input type="text" id="updateUserName" name="UserName" />
+                    <label for="updateUserEmail">Email:</label>
+                    <input type="text" id="updateUserEmail" name="UserEmail" />
+                    <button type="submit" id="updateUserButton">Update</button>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function setHiddenRecipeData(selectId, hiddenPrefix) {
+                var select = document.getElementById(selectId);
+                var selectedOption = select.options[select.selectedIndex];
+
+                document.getElementById(hiddenPrefix + 'RecipeId').value = selectedOption.value;
+                document.getElementById(hiddenPrefix + 'RecipeName').value = selectedOption.getAttribute('data-name');
+                document.getElementById(hiddenPrefix + 'RecipeImage').value = selectedOption.getAttribute('data-image');
+                document.getElementById(hiddenPrefix + 'RecipeCalories').value = selectedOption.getAttribute('data-calories');
+                document.getElementById(hiddenPrefix + 'RecipeTime').value = selectedOption.getAttribute('data-time');
+                document.getElementById(hiddenPrefix + 'RecipeIngredients').value = selectedOption.getAttribute('data-ingredients');
+                document.getElementById(hiddenPrefix + 'RecipeDescription').value = selectedOption.getAttribute('data-description');
+                document.getElementById(hiddenPrefix + 'RecipeInstructions').value = selectedOption.getAttribute('data-instructions');
+            }
+
+            function updateInputFields(selectId) {
+                var select = document.getElementById(selectId);
+                var selectedOption = select.options[select.selectedIndex];
+
+                document.getElementById('updateRecipeName').value = selectedOption.getAttribute('data-name');
+                document.getElementById('updateRecipeImage').value = selectedOption.getAttribute('data-image');
+                document.getElementById('updateRecipeCalories').value = selectedOption.getAttribute('data-calories');
+                document.getElementById('updateRecipeTime').value = selectedOption.getAttribute('data-time');
+                document.getElementById('updateRecipeIngredients').value = selectedOption.getAttribute('data-ingredients');
+                document.getElementById('updateRecipeDescription').value = selectedOption.getAttribute('data-description');
+                document.getElementById('updateRecipeInstructions').value = selectedOption.getAttribute('data-instructions');
+            }
+
+            function setHiddenReviewData(selectId, hiddenPrefix) {
+                var select = document.getElementById(selectId);
+                var selectedOption = select.options[select.selectedIndex];
+
+                document.getElementById(hiddenPrefix + 'ReviewId').value = selectedOption.value;
+                document.getElementById(hiddenPrefix + 'ReviewRecipeID').value = selectedOption.getAttribute('data-recipeid');
+                document.getElementById(hiddenPrefix + 'ReviewUserID').value = selectedOption.getAttribute('data-userid');
+                document.getElementById(hiddenPrefix + 'ReviewDatePosted').value = selectedOption.getAttribute('data-dateposted');
+                document.getElementById(hiddenPrefix + 'ReviewDescription').value = selectedOption.getAttribute('data-description');
+                document.getElementById(hiddenPrefix + 'ReviewRating').value = selectedOption.getAttribute('data-rating');
+            }
+
+            function updateReviewFields(selectId) {
+                var select = document.getElementById(selectId);
+                var selectedOption = select.options[select.selectedIndex];
+
+                document.getElementById('updateReviewDescription').value = selectedOption.getAttribute('data-description');
+                document.getElementById('updateReviewRating').value = selectedOption.getAttribute('data-rating');
+            }
+
+            function setHiddenUserData(selectId, hiddenPrefix) {
+                var select = document.getElementById(selectId);
+                var selectedOption = select.options[select.selectedIndex];
+
+                document.getElementById(hiddenPrefix + 'UserId').value = selectedOption.value;
+                document.getElementById(hiddenPrefix + 'UserName').value = selectedOption.getAttribute('data-username');
+                document.getElementById(hiddenPrefix + 'UserEmail').value = selectedOption.getAttribute('data-email');
+            }
+
+            function updateUserFields(selectId) {
+                var select = document.getElementById(selectId);
+                var selectedOption = select.options[select.selectedIndex];
+
+                document.getElementById('updateUserName').value = selectedOption.getAttribute('data-username');
+                document.getElementById('updateUserEmail').value = selectedOption.getAttribute('data-email');
+            }
+
+            document.getElementById("deleteRecipeButton").addEventListener("click", function () {
+                setHiddenRecipeData('deleteRecipeId', 'hidden');
+                document.forms[1].submit();
+            });
+
+            document.getElementById("updateRecipeButton").addEventListener("click", function () {
+                setHiddenRecipeData('updateRecipeId', 'hiddenUpdate');
+                document.forms[2].submit();
+            });
+
+            document.getElementById("deleteReviewButton").addEventListener("click", function () {
+                setHiddenReviewData('deleteReviewId', 'hidden');
+                document.forms[3].submit();
+            });
+
+            document.getElementById("updateReviewButton").addEventListener("click", function () {
+                setHiddenReviewData('updateReviewId', 'hiddenUpdate');
+                document.forms[4].submit();
+            });
+
+            document.getElementById("deleteUserButton").addEventListener("click", function () {
+                setHiddenUserData('deleteUserId', 'hidden');
+                document.forms[5].submit();
+            });
+
+            document.getElementById("updateUserButton").addEventListener("click", function () {
+                setHiddenUserData('updateUserId', 'hiddenUpdate');
+                document.forms[6].submit();
+            });
+
+            document.getElementById("showUpdateFormButton").addEventListener("click", function () {
+                var updateForm = document.getElementById("updateForm");
+                updateForm.style.display = (updateForm.style.display === "none") ? "block" : "none";
+            });
+
+            document.getElementById("showUpdateReviewFormButton").addEventListener("click", function () {
+                var updateReviewForm = document.getElementById("updateReviewForm");
+                updateReviewForm.style.display = (updateReviewForm.style.display === "none") ? "block" : "none";
+            });
+
+            document.getElementById("showUpdateUserFormButton").addEventListener("click", function () {
+                var updateUserForm = document.getElementById("updateUserForm");
+                updateUserForm.style.display = (updateUserForm.style.display === "none") ? "block" : "none";
+            });
+
+            document.getElementById("updateRecipeId").addEventListener("change", function () {
+                updateInputFields('updateRecipeId');
+            });
+
+            document.getElementById("updateReviewId").addEventListener("change", function () {
+                updateReviewFields('updateReviewId');
+            });
+
+            document.getElementById("updateUserId").addEventListener("change", function () {
+                updateUserFields('updateUserId');
+            });
+
+            // Initialize input fields with the first recipe's data
+            updateInputFields('updateRecipeId');
+            updateReviewFields('updateReviewId');
+            updateUserFields('updateUserId');
+        </script>
+    }
+    else
+    {
+        <div>Get out</div>
+    }
+}

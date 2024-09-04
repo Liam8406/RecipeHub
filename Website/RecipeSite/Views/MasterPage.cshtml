@@ -1,0 +1,85 @@
+﻿@using RecipeData.DataAccessLayer.Models
+@{
+    UserModel user = null;
+    string greetingMessage = "";
+    if (Session["user"] != null)
+    {
+        user = (UserModel)Session["user"];
+        DateTime dt = DateTime.Now;
+
+        if (dt.Hour >= 5 && dt.Hour < 12)
+        {
+            greetingMessage = $"Good Morning {user.UserName}";
+        }
+        else if (dt.Hour >= 12 && dt.Hour < 19)
+        {
+            greetingMessage = $"Good Afternoon {user.UserName}";
+        }
+        else if (dt.Hour >= 19 && dt.Hour < 22)
+        {
+            greetingMessage = $"Good Evening {user.UserName}";
+        }
+        else
+        {
+            greetingMessage = $"Good Night {user.UserName}";
+        }
+    }
+
+    List<TagModel> tagModels = null;
+    if (Session["Tags"] != null)
+    {
+        tagModels = (List<TagModel>)Session["Tags"];
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Styles/MasterPage.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="searchSubmitForm" method="get" action="http://localhost:54322/Recipes/ViewGetRecipe">
+        <header>
+            <a href="http://localhost:54322/Recipes/ViewHomePage" class="logo-container">
+                <img src="~/Content/images/RealLogo.png" class="logo" />
+            </a>
+            <nav>
+                @if (user != null)
+                {
+                    <label class="Name">@greetingMessage</label>
+                    <a href="http://localhost:54322/User/Logout" class="Logout-button">Logout</a>
+                    <a href="http://localhost:54322/Recipes/ViewUploadRecipe" class="upload-recipe-button">Upload Recipe</a>
+                    if (Session["Admin"] != null)
+                    { 
+                        <a href="http://localhost:54322/Admin/ViewAdminPage" class="admin-button">Admin Page</a>
+                    }
+                }
+                else
+                {
+                    <a href="http://localhost:54322/User/ViewLogIn" class="login-button">Login</a>
+                }
+                <a href="http://localhost:54322/Recipes/ViewFavouritePage" class="heart-button">
+                    <div class="heart"></div>
+                </a>
+                <button type="button" class="search-button" id="search">
+                    <img class="search-button" src="~/Content/images/Search.png" />
+                </button>
+                <div hidden class="search-box" id="search-box">
+                    <input id="searchByName" placeholder="Search a recipe" type="text" class="input" name="RecipeName" />
+                    <input id="searchByTime" placeholder="Search by time" type="text" class="input" name="Time" />
+                    <input id="searchByCalories" placeholder="Search by calories" type="text" class="input" name="Calories" />
+                    <input type="submit" id="searchButton" value="Search" />
+                </div>
+            </nav>
+        </header>
+
+        @RenderSection("MainContent", required: false)
+
+        <footer>
+            <p>Credits and other details</p>
+        </footer>
+    </form>
+    <script src="~/Content/JavaScript/Search.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\bin\Debug\WebApiClient.dll
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\bin\Debug\WebApiClient.pdb
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\obj\Debug\WebApiClient.csproj.AssemblyReference.cache
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\obj\Debug\WebApiClient.csproj.CoreCompileInputs.cache
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\obj\Debug\WebApiClient.csproj.CopyComplete
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\obj\Debug\WebApiClient.dll
+C:\Users\iliam\source\repos\RecipeData\WebApiClient\obj\Debug\WebApiClient.pdb
